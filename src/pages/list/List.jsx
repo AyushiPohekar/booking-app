@@ -6,6 +6,7 @@ import Navbar from "../../components/navbar/Navbar";
 import { format } from "date-fns";
 import { DateRange } from "react-date-range";
 import "./list.css";
+import SearchItem from "../../components/searchItem/SearchItem";
 
 export default function List() {
   const location = useLocation();
@@ -68,7 +69,7 @@ export default function List() {
                   <span className="lsOptionText">Children</span>
                   <input
                     type="number"
-                    min={1}
+                    min={0}
                     className="lsOptionInput"
                     placeholder={options.children}
                   />
@@ -86,7 +87,15 @@ export default function List() {
             </div>
             <button>Search</button>
           </div>
-          <div className="listResult"></div>
+          <div className="listResult">
+            <SearchItem/>
+            <SearchItem/>
+            <SearchItem/>
+            <SearchItem/>
+            <SearchItem/>
+            <SearchItem/>
+            <SearchItem/>
+          </div>
         </div>
       </div>
     </div>
