@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faBed,
@@ -15,6 +15,8 @@ import "react-date-range/dist/theme/default.css"; // theme css file
 import { format } from "date-fns";
 import "./Header.css";
 import { useNavigate } from "react-router-dom";
+import { SearchContext } from "../../Context/SearchContext";
+import { AuthContext } from "../../Context/AuthContext";
 
 export default function Header({type}) {
   const [destination, setDestination] = useState('');
@@ -34,8 +36,12 @@ export default function Header({type}) {
     room: 1,
   });
   const navigate=useNavigate();
+  const {user } = useContext(AuthContext);
+
+  const { dispatch } = useContext(SearchContext);
 
   const handleSearch=()=>{
+    dispatch({ type: "NEW_SEARCH", payload: { destination, date, options } });
     navigate("/hotels",{state:{destination,date,options}})
   }
 
@@ -79,7 +85,7 @@ export default function Header({type}) {
           Get rewarded for your travels – unlock instant savings of 10% or more
           with a free Lamabooking account
         </p>
-        <button className="headerBtn">Sign in / Register</button>
+       {!user&& <button className="headerBtn">Sign in / Register</button>}
         <div className="headerSearch">
           <div className="headerSearchItem">
             <FontAwesomeIcon icon={faBed} className="headerIcon" />
