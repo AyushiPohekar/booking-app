@@ -23,6 +23,7 @@ export default function List() {
   const { data, loading,  reFetch } = useFetch(
     `${API}/hotels?city=${destination}&min=${min || 0 }&max=${max || 1500}`
   );
+  console.log(data)
 
   const handleClick = () => {
     reFetch();

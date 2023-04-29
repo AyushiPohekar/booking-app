@@ -20,12 +20,13 @@ import Reserve from "../../components/reserve/Reserve";
 
 const Hotel = () => {
   const location = useLocation();
-
+  const singlehotel=location.state.singlehotel;
+  console.log(singlehotel)
   const id = location.pathname.split("/")[2];
   const [slideNumber, setSlideNumber] = useState(0);
   const [open, setOpen] = useState(false);
   const [openModal, setOpenModal] = useState(false);
-  const { data, loading, error } = useFetch(`${API}/hotels/find/${id}`);
+  const {  loading, error } = useFetch(`${API}/hotels/find/${id}`);
 
   // const photos = [
   //   {
@@ -106,7 +107,7 @@ const Hotel = () => {
               />
               <div className="sliderWrapper">
                 <img
-                  src={data.photos[slideNumber]?.src}
+                  src={singlehotel.photos[slideNumber]?.src}
                   alt=""
                   className="sliderImg"
                 />
@@ -120,20 +121,20 @@ const Hotel = () => {
           )}
           <div className="hotelWrapper">
             <button className="bookNow">Reserve or Book Now!</button>
-            <h1 className="hotelTitle">{data.name}</h1>
+            <h1 className="hotelTitle">{singlehotel.name}</h1>
             <div className="hotelAddress">
               <FontAwesomeIcon icon={faLocationDot} />
-              <span>{data.address}</span>
+              <span>{singlehotel.address}</span>
             </div>
             <span className="hotelDistance">
-              Excellent location – {data.distance} from center
+              Excellent location – {singlehotel.distance} from center
             </span>
             <span className="hotelPriceHighlight">
-              Book a stay over Rs.{data.cheapestPrice} at this property and get
+              Book a stay over Rs.{singlehotel.cheapestPrice} at this property and get
               a free airport taxi
             </span>
             <div className="hotelImages">
-              {data.photos?.map((photo, i) => (
+              {singlehotel.photos?.map((photo, i) => (
                 <div className="hotelImgWrapper" key={i}>
                   <img
                     onClick={() => handleOpen(i)}
@@ -146,8 +147,8 @@ const Hotel = () => {
             </div>
             <div className="hotelDetails">
               <div className="hotelDetailsTexts">
-                <h1 className="hotelTitle">{data.title}</h1>
-                <p className="hotelDesc">{data.desc}</p>
+                <h1 className="hotelTitle">{singlehotel.title}</h1>
+                <p className="hotelDesc">{singlehotel.desc}</p>
               </div>
               <div className="hotelDetailsPrice">
                 <h1>Perfect for a {days}-night stay!</h1>
@@ -156,7 +157,7 @@ const Hotel = () => {
                   excellent location score of 9.8!
                 </span>
                 <h2>
-                  <b>Rs {days * data.cheapestPrice * options.room}</b> <br></br>
+                  <b>Rs {days * singlehotel.cheapestPrice * options.room}</b> <br></br>
                   ({days} nights)
                 </h2>
                 <button onClick={handleClick}>Reserve or Book Now!</button>
