@@ -41,8 +41,8 @@ export default function Header({type}) {
   const { dispatch } = useContext(SearchContext);
 
   const handleSearch=()=>{
-    dispatch({ type: "NEW_SEARCH", payload: { dates } });
-    navigate("/hotels",{state:{dates}})
+    dispatch({ type: "NEW_SEARCH", payload: { dates,options,destination } });
+    navigate("/hotels",{state:{dates,options,destination}})
   }
 
   const handleOption = (name, operation) => {
