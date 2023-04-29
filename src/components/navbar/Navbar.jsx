@@ -9,7 +9,7 @@ export default function Navbar() {
     <div className='navbar'>
         <div className='navContainer'>
           <Link to="/" style={{ color: "inherit", textDecoration: "none" }}>
-            <span className='logo'>Booking</span>
+            <span className='logo'><b>BookIT</b></span>
             </Link>
             {user?user.username : (<div className='navItems'>
                 <button className='navButton'>Register</button>
