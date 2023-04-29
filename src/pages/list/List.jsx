@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useState } from "react";
 import { useLocation } from "react-router-dom";
 import Header from "../../components/header/Header";
@@ -9,12 +9,14 @@ import "./list.css";
 import SearchItem from "../../components/searchItem/SearchItem";
 import useFetch from "../../hooks/useFetch";
 import { API } from "../../components/global";
+import { SearchContext } from "../../Context/SearchContext";
 
 export default function List() {
+  const { dispatch } = useContext(SearchContext);
   const location = useLocation();
   const [destination, setdestination] = useState(location.state.destination);
-  const [date, setDate] = useState(location.state.date);
-  console.log(date,'date')
+  const [dates, setDates] = useState(location.state.dates);
+  console.log('date in list:',dates)
   const [options, setoptions] = useState(location.state.options);
   const [openDate, setOpenDate] = useState(false);
 
@@ -26,7 +28,7 @@ export default function List() {
   );
 
   const handleClick = () => {
-    dispatch({ type: "NEW_SEARCH", payload: { destination, date, options } });
+    dispatch({ type: "NEW_SEARCH", payload: { destination, dates, options } });
     reFetch();
   };
   return (
@@ -44,15 +46,23 @@ export default function List() {
             <div className="lsItem">
               <label>Check-in Date</label>
               <span onClick={() => setOpenDate(!openDate)}>{`${format(
-                date[0].startDate,
+                dates[0].startDate,
                 "MM/dd/yyyy"
-              )} to ${format(date[0].endDate, "MM/dd/yyyy")}`}</span>
+              )} to ${format(dates[0].endDate, "MM/dd/yyyy")}`}</span>
 
               {openDate && (
+                // <DateRange
+                //   onChange={(item) => setDates([item.selection])}
+                //   minDate={new Date()}
+                //   ranges={dates}
+                // />
                 <DateRange
-                  onChange={(item) => setDate([item.selection])}
-                  minDate={new Date()}
-                  ranges={date}
+                editableDateInputs={true}
+                onChange={(item) => setDates([item.selection])}
+                moveRangeOnFirstSelection={false}
+                ranges={dates}
+                minDate={new Date()}
+                className="date"
                 />
               )}
             </div>

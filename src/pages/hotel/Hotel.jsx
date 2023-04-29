@@ -49,8 +49,8 @@ const Hotel = () => {
   //   },
   // ];
   console.log(data)
-  const { date, options } = useContext(SearchContext);
-  //console.log("date",date)
+  const { dates, options } = useContext(SearchContext);
+  console.log("date after seeavalibility:",dates)
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
 
@@ -61,7 +61,7 @@ const Hotel = () => {
     return diffDays;
   }
 
-  const days = dayDifference(date[0].endDate, date[0].startDate);
+  const days = dayDifference(dates[0].endDate, dates[0].startDate);
   const handleOpen = (i) => {
     setSlideNumber(i);
     setOpen(true);

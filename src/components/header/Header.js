@@ -21,7 +21,7 @@ import { AuthContext } from "../../Context/AuthContext";
 export default function Header({type}) {
   const [destination, setDestination] = useState('');
   const [openDate, setOpenDate] = useState(false);
-  const [date, setDate] = useState([
+  const [dates, setDates] = useState([
     {
       startDate: new Date(),
       endDate: new Date(),
@@ -41,8 +41,8 @@ export default function Header({type}) {
   const { dispatch } = useContext(SearchContext);
 
   const handleSearch=()=>{
-    dispatch({ type: "NEW_SEARCH", payload: { destination, date, options } });
-    navigate("/hotels",{state:{destination,date,options}})
+    dispatch({ type: "NEW_SEARCH", payload: { dates } });
+    navigate("/hotels",{state:{dates}})
   }
 
   const handleOption = (name, operation) => {
@@ -103,16 +103,16 @@ export default function Header({type}) {
             <span
               onClick={() => setOpenDate(!openDate)}
               className="headerSearchText"
-            >{`${format(date[0].startDate, "MM/dd/yyyy")} to ${format(
-              date[0].endDate,
+            >{`${format(dates[0].startDate, "MM/dd/yyyy")} to ${format(
+              dates[0].endDate,
               "MM/dd/yyyy"
             )}`}</span>
             {openDate && (
               <DateRange
                 editableDateInputs={true}
-                onChange={(item) => setDate([item.selection])}
+                onChange={(item) => setDates([item.selection])}
                 moveRangeOnFirstSelection={false}
-                ranges={date}
+                ranges={dates}
                 minDate={new Date()}
                 className="date"
               />
