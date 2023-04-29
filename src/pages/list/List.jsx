@@ -14,6 +14,7 @@ export default function List() {
   const location = useLocation();
   const [destination, setdestination] = useState(location.state.destination);
   const [date, setDate] = useState(location.state.date);
+  console.log(date,'date')
   const [options, setoptions] = useState(location.state.options);
   const [openDate, setOpenDate] = useState(false);
 
@@ -25,6 +26,7 @@ export default function List() {
   );
 
   const handleClick = () => {
+    dispatch({ type: "NEW_SEARCH", payload: { destination, date, options } });
     reFetch();
   };
   return (
