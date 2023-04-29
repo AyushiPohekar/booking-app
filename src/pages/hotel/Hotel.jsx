@@ -22,7 +22,8 @@ const Hotel = () => {
   const location = useLocation();
 
   const id = location.pathname.split("/")[2];
-  const [slideNumber, setSlideNumber] = useState(0);
+ let [slideNumber, setSlideNumber] = useState(0);
+  console.log(typeof(slideNumber))
   const [open, setOpen] = useState(false);
   const [openModal, setOpenModal] = useState(false);
   const { data, loading, error } = useFetch(`${API}/hotels/find/${id}`);
@@ -47,7 +48,9 @@ const Hotel = () => {
   //     src: "https://cf.bstatic.com/xdata/images/hotel/max1280x900/261707389.jpg?k=52156673f9eb6d5d99d3eed9386491a0465ce6f3b995f005ac71abc192dd5827&o=&hp=1",
   //   },
   // ];
+  console.log(data)
   const { date, options } = useContext(SearchContext);
+  //console.log("date",date)
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
 
@@ -65,13 +68,16 @@ const Hotel = () => {
   };
 
   const handleMove = (direction) => {
+   
     let newSlideNumber;
-
+    
+ 
     if (direction === "l") {
       newSlideNumber = slideNumber === 0 ? 5 : slideNumber - 1;
     } else {
       newSlideNumber = slideNumber === 5 ? 0 : slideNumber + 1;
     }
+   
 
     setSlideNumber(newSlideNumber);
   };
@@ -106,7 +112,7 @@ const Hotel = () => {
               />
               <div className="sliderWrapper">
                 <img
-                  src={data.photos[slideNumber]?.src}
+                  src={data.photos[slideNumber].src}
                   alt=""
                   className="sliderImg"
                 />
@@ -133,8 +139,10 @@ const Hotel = () => {
               a free airport taxi
             </span>
             <div className="hotelImages">
-              {data.photos?.map((photo, i) => (
-                <div className="hotelImgWrapper" key={i}>
+              {data.photos?.map((photo,i)=>{
+                return(
+                  <>
+                   <div className="hotelImgWrapper" key={i}>
                   <img
                     onClick={() => handleOpen(i)}
                     src={photo.src}
@@ -142,7 +150,10 @@ const Hotel = () => {
                     className="hotelImg"
                   />
                 </div>
-              ))}
+                  
+                  </>
+                )
+              })}
             </div>
             <div className="hotelDetails">
               <div className="hotelDetailsTexts">

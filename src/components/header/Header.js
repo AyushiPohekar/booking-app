@@ -94,6 +94,7 @@ export default function Header({type}) {
               placeholder="Where are you going?"
               className="headerSearchInput"
               onChange={(e)=>setDestination(e.target.value)}
+              required
             />
           </div>
 
