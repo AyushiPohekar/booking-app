@@ -16,7 +16,7 @@ const Featured = () => {
         <>
           <div className="featuredItem">
             <img
-              src="https://cf.bstatic.com/xdata/images/city/max500/957801.webp?k=a969e39bcd40cdcc21786ba92826063e3cb09bf307bcfeac2aa392b838e9b7a5&o="
+              src="https://yometro.com/images/places/nagpur.jpg"
               alt=""
               className="featuredImg"
             />
@@ -28,18 +28,18 @@ const Featured = () => {
 
           <div className="featuredItem">
             <img
-              src="https://cf.bstatic.com/xdata/images/city/max500/690334.webp?k=b99df435f06a15a1568ddd5f55d239507c0156985577681ab91274f917af6dbb&o="
+              src="https://w.media/wp-content/uploads/chennai1-fb-IC-The-Indian-Express.jpg"
               alt=""
               className="featuredImg"
             />
             <div className="featuredTitles">
-              <h1>chhindwara</h1>
+              <h1>Delhi</h1>
               <h2>{data[1]} properties</h2>
             </div>
           </div>
           <div className="featuredItem">
             <img
-              src="https://cf.bstatic.com/xdata/images/city/max500/689422.webp?k=2595c93e7e067b9ba95f90713f80ba6e5fa88a66e6e55600bd27a5128808fdf2&o="
+              src="https://content.r9cdn.net/rimg/dimg/0b/a6/b99dc19c-city-13827-164946c677a.jpg?crop=true&width=1020&height=498"
               alt=""
               className="featuredImg"
             />
