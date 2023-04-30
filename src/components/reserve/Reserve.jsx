@@ -11,9 +11,11 @@ import { API } from "../global";
 import { SearchContext } from "../../Context/SearchContext";
 
 const Reserve = ({ setOpen, hotelId }) => {
+ // console.log('reserveid',hotelId)
   const [selectedRooms, setSelectedRooms] = useState([]);
+  console.log(selectedRooms)
   const { data, loading, error } = useFetch(`${API}/hotels/room/${hotelId}`);
-  const { date } = useContext(SearchContext);
+  const { dates } = useContext(SearchContext);
 
  const  getDatesInRange =(startDate, endDate) => {
      const start = new Date(startDate);
@@ -30,7 +32,7 @@ const Reserve = ({ setOpen, hotelId }) => {
   
     return list
    };  
-   const alldates=(getDatesInRange(date[0].startDate, date[0].endDate));
+   const alldates=(getDatesInRange(dates[0].startDate, dates[0].endDate));
 
    const isAvailable = (roomNumber) => {
     const isFound = roomNumber.unavailableDates.some((date1) =>
@@ -62,7 +64,7 @@ const Reserve = ({ setOpen, hotelId }) => {
       await Promise.all(
         selectedRooms.map((roomId) => {
           const res = axios.put(`${API}/rooms/availability/${roomId}`, {
-            date: alldates,
+            dates: alldates,
            
           }
           );
@@ -94,7 +96,7 @@ const Reserve = ({ setOpen, hotelId }) => {
               <div className="rMax">
                 Max people: <b>{item.maxPeople}</b>
               </div>
-              <div className="rPrice">{item.price}</div>
+              <div className="rPrice">Rs.{item.price}</div>
             </div>
             <div className="rSelectRooms">
               {item.roomNumbers.map((roomNumber) => (

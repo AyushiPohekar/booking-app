@@ -24,7 +24,7 @@ export default function List() {
   const [max, setMax] = useState(undefined);
 
   const { data, loading,  reFetch } = useFetch(
-    `${API}/hotels?city=${destination}&min=${min || 0 }&max=${max || 1500}`
+    `${API}/hotels?city=${destination}&min=${min || 0 }&max=${max || 5000}`
   );
   console.log(data)
 

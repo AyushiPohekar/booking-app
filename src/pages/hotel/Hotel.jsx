@@ -21,7 +21,7 @@ import Reserve from "../../components/reserve/Reserve";
 const Hotel = () => {
   const location = useLocation();
   const singlehotel=location.state.singlehotel;
-  console.log(singlehotel)
+  console.log('singlehotel',singlehotel)
   const id = location.pathname.split("/")[2];
  let [slideNumber, setSlideNumber] = useState(0);
   console.log(typeof(slideNumber))
@@ -85,6 +85,7 @@ const Hotel = () => {
 
   const handleClick = () => {
     if (user) {
+      console.log("hi")
       setOpenModal(true);
     } else {
       navigate("/login");
@@ -126,7 +127,7 @@ const Hotel = () => {
             </div>
           )}
           <div className="hotelWrapper">
-            <button className="bookNow">Reserve or Book Now!</button>
+            <button className="bookNow" onClick={handleClick}>Reserve or Book Now!</button>
             <h1 className="hotelTitle">{singlehotel.name}</h1>
             <div className="hotelAddress">
               <FontAwesomeIcon icon={faLocationDot} />
@@ -179,7 +180,7 @@ const Hotel = () => {
           <Footer />
         </div>
       )}
-      {openModal && <Reserve setOpen={setOpenModal} hotelId={id}/>}
+      {openModal && <Reserve setOpen={setOpenModal} hotelId={singlehotel._id}/>}
     </div>
   );
 };
