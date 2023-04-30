@@ -38,6 +38,13 @@
     padding: 10px;
     cursor: pointer;
 }
+.headerBtn span{
+    padding: 2px;
+}
+.headerBtn span:hover{
+text-decoration: underline;
+color: wheat;
+}
 .headerSearch{
     height: 30px;
     background-color: white;

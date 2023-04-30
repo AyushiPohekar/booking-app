@@ -39,7 +39,13 @@ const Login = () => {
 
   return (
     <div className="login">
-      <div className="lContainer">
+      <div className="form_heading">
+            <p style={{ textAlign: "center" }}>
+              Welcome to{" "}
+              <span style={{ color: "yellow", fontSize: "2rem" }}>BOOKIT!</span>
+            </p>
+          </div>
+      <div className="formbox">
         <input
           type="text"
           placeholder="username"
@@ -54,12 +60,14 @@ const Login = () => {
           onChange={handleChange}
           className="lInput"
         />
-        <button disabled={loading} onClick={handleClick} className="lButton">
+        <button disabled={loading} onClick={handleClick} className="btn">
           Login
         </button>
         {error && <span>{error.message}</span>}
-
-       
+        <div className="logindiv">
+        <p>Are you new?</p>
+       <button onClick={()=>navigate('/signup')} className="loginbtn">SignUp</button>
+       </div>
       </div>
     </div>
   );

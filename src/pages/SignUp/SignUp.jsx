@@ -1,27 +1,71 @@
-import React from "react";
+import React, { useState } from "react";
 import "./SignUp.css";
-import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import { API } from "../../components/global";
+
 const SignUp = () => {
+  const [inpval, setInpval] = useState({
+    username: "",
+    email: "",
+    password: "",
+    phone: "",
+    country: "",
+    city: "",
+    img: "",
+  });
+  console.log(inpval);
+
+  const setVal = (e) => {
+    //console.log(e.target.value);
+    const { name, value } = e.target;
+
+    setInpval(() => {
+      return {
+        ...inpval,
+        [name]: value,
+      };
+    });
+  };
+
+  const navigate = useNavigate();
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const res = await axios.post(`${API}/auth/register`, inpval);
+      console.log(res);
+      if (res && res.status === 200) {
+        navigate("/login");
+      } else {
+        console.log("error in Signup");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <>
       <section>
         <div className="form_data">
           <div className="form_heading">
-            <h1>Sign Up</h1>
             <p style={{ textAlign: "center" }}>
-              We are glad that you will be using Project Cloud to manage <br />
-              your tasks! We hope that you will get like it.
+              Welcome to{" "}
+              <span style={{ color: "yellow", fontSize: "2rem" }}>BOOKIT!</span>
             </p>
           </div>
 
-          <form>
+          <form className="formbox">
             <div className="form_input">
               <label htmlFor="fname">Name</label>
               <input
                 type="text"
-                name="fname"
-                id="fname"
+                name="username"
+                id="username"
                 placeholder="Enter Your Name"
+                onChange={setVal}
+                value={inpval.username}
               />
             </div>
             <div className="form_input">
@@ -31,6 +75,8 @@ const SignUp = () => {
                 name="email"
                 id="email"
                 placeholder="Enter Your Email Address"
+                onChange={setVal}
+                value={inpval.email}
               />
             </div>
             <div className="form_input">
@@ -40,6 +86,8 @@ const SignUp = () => {
                 name="country"
                 id="country"
                 placeholder="Enter Your country "
+                onChange={setVal}
+                value={inpval.country}
               />
             </div>
             <div className="form_input">
@@ -49,6 +97,8 @@ const SignUp = () => {
                 name="city"
                 id="city"
                 placeholder="Enter Your city "
+                onChange={setVal}
+                value={inpval.city}
               />
             </div>
             <div className="form_input">
@@ -58,27 +108,45 @@ const SignUp = () => {
                 name="phone"
                 id="phone"
                 placeholder="Enter Your phone "
+                onChange={setVal}
+                value={inpval.phone}
+              />
+            </div>
+            <div className="form_input">
+              <label htmlFor="fname">ImageUrl</label>
+              <input
+                type="text"
+                name="img"
+                id="img"
+                placeholder="Enter ImageUrl "
+                onChange={setVal}
+                value={inpval.img}
               />
             </div>
             <div className="form_input">
               <label htmlFor="password">Password</label>
-              <div className="two">
-                <input
+
+              <input
                 //   type={!passShow ? "password" : "text"}
-                  name="password"
-                  id="password"
-                  placeholder="Enter Your password"
-                />
-                {/* <div className="showpass" onClick={() => setPassShow(!passShow)}>
+                name="password"
+                id="password"
+                placeholder="Enter Your password"
+                onChange={setVal}
+                inpval={inpval.password}
+              />
+              {/* <div className="showpass" onClick={() => setPassShow(!passShow)}>
                             {!passShow ? "Show" : "Hide"}
                         </div> */}
-              </div>
             </div>
 
-            <button className="btn">Sign Up</button>
-            <p>
-              Already have an account? <Navigate to="/login">Log In</Navigate>
-            </p>
+            <button className="btn" onClick={handleSubmit}>
+              Sign Up
+            </button>
+            <div className="logindiv">
+           
+              <p>Already have an account?</p>
+              <button className="loginbtn" onClick={()=>navigate('/login')}>Login</button>
+            </div>
           </form>
         </div>
       </section>
