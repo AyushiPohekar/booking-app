@@ -5,7 +5,7 @@ import { API } from "../global";
 
 const Featured = () => {
   const { data, loading, error } = useFetch(
-    `${API}/hotels/countByCity?cities=nagpur,chhindwara,chennai`
+    `${API}/hotels/countByCity?cities=nagpur,delhi,chennai`
   );
 
   return (
@@ -33,7 +33,7 @@ const Featured = () => {
               className="featuredImg"
             />
             <div className="featuredTitles">
-              <h1>Delhi</h1>
+              <h1>delhi</h1>
               <h2>{data[1]} properties</h2>
             </div>
           </div>
