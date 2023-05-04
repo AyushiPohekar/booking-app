@@ -1,1 +1,1 @@
-export const API="http://localhost:8001/api";
+export const API="https://hotelbooking-619f.onrender.com/api";
