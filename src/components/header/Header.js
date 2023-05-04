@@ -92,7 +92,7 @@ export default function Header({ type }) {
             <p className="headerDesc">
               {" "}
               Get rewarded for your travels – unlock instant savings of 10% or
-              more with a free Lamabooking account
+              more with a free BookIT account
             </p>
             {!user && (
               <button className="headerBtn">
