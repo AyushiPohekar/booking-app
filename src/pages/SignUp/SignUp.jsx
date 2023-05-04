@@ -77,6 +77,7 @@ const SignUp = () => {
                 placeholder="Enter Your Email Address"
                 onChange={setVal}
                 value={inpval.email}
+                required
               />
             </div>
             <div className="form_input">
@@ -133,6 +134,8 @@ const SignUp = () => {
                 placeholder="Enter Your password"
                 onChange={setVal}
                 inpval={inpval.password}
+                type="password"
+                required
               />
               {/* <div className="showpass" onClick={() => setPassShow(!passShow)}>
                             {!passShow ? "Show" : "Hide"}
