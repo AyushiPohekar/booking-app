@@ -4,7 +4,8 @@ import List from "./pages/list/List";
 import Hotel from "./pages/hotel/Hotel";
 import Login from "./pages/login/Login";
 import SignUp from "./pages/SignUp/SignUp";
-import Hello from "./components/Hello";
+import { ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
     <Route path='/signup' element={<SignUp/>}/>
     <Route path="/hotels/:id" element={<Hotel/>}/>
   </Routes>
+  <ToastContainer/>
   </BrowserRouter>
   );
 }

@@ -17,6 +17,7 @@ import "./Header.css";
 import { useNavigate } from "react-router-dom";
 import { SearchContext } from "../../Context/SearchContext";
 import { AuthContext } from "../../Context/AuthContext";
+import { toast } from "react-toastify";
 
 export default function Header({ type }) {
   const [destination, setDestination] = useState("");
@@ -41,6 +42,13 @@ export default function Header({ type }) {
   const { dispatch } = useContext(SearchContext);
 
   const handleSearch = () => {
+    if(destination!=='nagpur'||'delhi'||'chennai')
+    {
+      toast.info("Currently,we dont have services in this city.You can search from nagpur,delhi,chennai")
+    setTimeout(()=>{
+      navigate('/')
+    },5000)
+    }
     dispatch({ type: "NEW_SEARCH", payload: { dates, options, destination } });
     navigate("/hotels", { state: { dates, options, destination } });
   };
@@ -115,6 +123,7 @@ export default function Header({ type }) {
               <div className="headerSearchItem">
                 <FontAwesomeIcon icon={faCalendarDays} className="headerIcon" />
                 <span
+                required
                   onClick={() => setOpenDate(!openDate)}
                   className="headerSearchText"
                 >{`${format(dates[0].startDate, "MM/dd/yyyy")} to ${format(
@@ -138,6 +147,7 @@ export default function Header({ type }) {
                 <span
                   onClick={() => setOpenOptions(!openOptions)}
                   className="headerSearchText"
+                  required
                 >
                   {`${options.adult} adult . ${options.children} children . ${options.room} room`}
                 </span>
