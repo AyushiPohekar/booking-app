@@ -42,9 +42,9 @@ export default function Header({ type }) {
   const { dispatch } = useContext(SearchContext);
 
   const handleSearch = () => {
-    if(destination!=='nagpur'||'delhi'||'chennai')
+    if((destination!=='nagpur')&&(destination!=='chennai')&&(destination!=='delhi'))
     {
-      toast.info("Currently,we dont have services in this city.You can search from nagpur,delhi,chennai")
+      toast.info(`You have selected ${destination} Currently,we dont have services in this city.You can search from nagpur,delhi,chennai`)
     setTimeout(()=>{
       navigate('/')
     },5000)
