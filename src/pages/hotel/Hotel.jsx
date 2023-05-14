@@ -180,7 +180,7 @@ const Hotel = () => {
           <Footer />
         </div>
       )}
-      {openModal && <Reserve setOpen={setOpenModal} hotelId={singlehotel._id}/>}
+      {openModal && <Reserve setOpen={setOpenModal} hotelId={singlehotel._id} days={days}/>}
     </div>
   );
 };

@@ -10,10 +10,16 @@ import { useNavigate } from "react-router-dom";
 import { API } from "../global";
 import { SearchContext } from "../../Context/SearchContext";
 
-const Reserve = ({ setOpen, hotelId }) => {
+const Reserve = ({ setOpen, hotelId ,days}) => {
  // console.log('reserveid',hotelId)
   const [selectedRooms, setSelectedRooms] = useState([]);
-  console.log(selectedRooms)
+ const [totalprice,setTotalPrice]=useState()
+
+  const no_of_reserved_rooms=selectedRooms.length;
+  console.log(selectedRooms.length)
+  console.log("days",days)
+
+
   const { data, loading, error } = useFetch(`${API}/hotels/room/${hotelId}`);
   const { dates } = useContext(SearchContext);
 
@@ -42,11 +48,26 @@ const Reserve = ({ setOpen, hotelId }) => {
     return !isFound;
   };
 
- 
 
+
+
+  //  const handleSelect = (item) => {
+  //   console.log(item)
+  
+  
+  //   // const checked = e.target.checked;
+  //   // const value = e.target.value;
+ 
+  //   // setSelectedRooms(
+  //   //   checked
+  //   //     ? [...selectedRooms, value]
+  //   //     : selectedRooms.filter((item) => item !== value)
+  //   // );
+  // };
 
   const handleSelect = (e) => {
     const checked = e.target.checked;
+    console.log("checked",checked)
     const value = e.target.value;
     setSelectedRooms(
       checked
@@ -67,8 +88,10 @@ const Reserve = ({ setOpen, hotelId }) => {
             dates: alldates,
            
           }
+         
           );
           return res.data;
+         
         })
      
       );
@@ -88,6 +111,7 @@ const Reserve = ({ setOpen, hotelId }) => {
           onClick={() => setOpen(false)}
         />
         <span>Select your rooms:</span>
+        { console.log(data)}
         {data.map((item) => (
           <div className="rItem" key={item._id}>
             <div className="rItemInfo">
@@ -105,14 +129,22 @@ const Reserve = ({ setOpen, hotelId }) => {
                   <input
                     type="checkbox"
                     value={roomNumber._id}
+                 
                     onChange={handleSelect}
+                    // onChange={handleSelect(item)}
                     disabled={!isAvailable(roomNumber)}
                   />
                 </div>
               ))}
+              
+                 
             </div>
+           { console.log(days*item.price*no_of_reserved_rooms)}
+      
           </div>
+         
         ))}
+      
         <button onClick={handleClick} className="rButton">
           Reserve Now!
         </button>
